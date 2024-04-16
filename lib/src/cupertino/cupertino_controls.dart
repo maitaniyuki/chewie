@@ -86,6 +86,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
     return MouseRegion(
       onHover: (_) => _cancelAndRestartTimer(),
       child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
         onTap: () => _cancelAndRestartTimer(),
         child: AbsorbPointer(
           absorbing: notifier.hideStuff,
@@ -155,6 +156,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
     }
 
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: () async {
         _hideTimer?.cancel();
 
@@ -265,6 +267,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
     double buttonPadding,
   ) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: _onExpandCollapse,
       child: AnimatedOpacity(
         opacity: notifier.hideStuff ? 0.0 : 1.0,
@@ -302,6 +305,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
         widget.showPlayButton && !_latestValue.isPlaying && !_dragging;
 
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: _latestValue.isPlaying
           ? _cancelAndRestartTimer
           : () {
@@ -330,6 +334,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
     double buttonPadding,
   ) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: () {
         _cancelAndRestartTimer();
 
@@ -374,6 +379,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
     double barHeight,
   ) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: _playPause,
       child: Container(
         height: barHeight,
@@ -423,6 +429,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
       return const SizedBox();
     }
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: _subtitleToggle,
       child: Container(
         height: barHeight,
@@ -449,6 +456,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
 
   GestureDetector _buildSkipBack(Color iconColor, double barHeight) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: _skipBack,
       child: Container(
         height: barHeight,
@@ -469,6 +477,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
 
   GestureDetector _buildSkipForward(Color iconColor, double barHeight) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: _skipForward,
       child: Container(
         height: barHeight,
@@ -495,6 +504,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
     double barHeight,
   ) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: () async {
         _hideTimer?.cancel();
 
