@@ -10,7 +10,6 @@ import 'package:chewie/src/cupertino/cupertino_progress_bar.dart';
 import 'package:chewie/src/cupertino/widgets/cupertino_options_dialog.dart';
 import 'package:chewie/src/helpers/utils.dart';
 import 'package:chewie/src/models/option_item.dart';
-import 'package:chewie/src/models/subtitle_model.dart';
 import 'package:chewie/src/notifiers/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +44,6 @@ class _CupertinoControlsState extends State<CupertinoControls>
   Timer? _expandCollapseTimer;
   Timer? _initTimer;
   bool _dragging = false;
-  Duration? _subtitlesPosition;
   bool _subtitleOn = false;
   Timer? _bufferingDisplayTimer;
   bool _displayBufferingIndicator = false;
@@ -108,15 +106,6 @@ class _CupertinoControlsState extends State<CupertinoControls>
                     barHeight,
                     buttonPadding,
                   ),
-                  const Spacer(),
-                  if (_subtitleOn)
-                    Transform.translate(
-                      offset: Offset(
-                        0.0,
-                        notifier.hideStuff ? barHeight * 0.8 : 0.0,
-                      ),
-                      child: _buildSubtitles(chewieController.subtitle!),
-                    ),
                   _buildBottomBar(backgroundColor, iconColor, barHeight),
                 ],
               ),
@@ -196,44 +185,6 @@ class _CupertinoControlsState extends State<CupertinoControls>
           Icons.more_vert,
           color: iconColor,
           size: 18,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSubtitles(Subtitles subtitles) {
-    if (!_subtitleOn) {
-      return const SizedBox();
-    }
-    if (_subtitlesPosition == null) {
-      return const SizedBox();
-    }
-    final currentSubtitle = subtitles.getByPosition(_subtitlesPosition!);
-    if (currentSubtitle.isEmpty) {
-      return const SizedBox();
-    }
-
-    if (chewieController.subtitleBuilder != null) {
-      return chewieController.subtitleBuilder!(
-        context,
-        currentSubtitle.first!.text,
-      );
-    }
-
-    return Padding(
-      padding: EdgeInsets.only(left: marginSize, right: marginSize),
-      child: Container(
-        padding: const EdgeInsets.all(5),
-        decoration: BoxDecoration(
-          color: const Color(0x96000000),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Text(
-          currentSubtitle.first!.text.toString(),
-          style: const TextStyle(
-            fontSize: 18,
-          ),
-          textAlign: TextAlign.center,
         ),
       ),
     );
@@ -815,7 +766,6 @@ class _CupertinoControlsState extends State<CupertinoControls>
 
     setState(() {
       _latestValue = controller.value;
-      _subtitlesPosition = controller.value.position;
     });
   }
 }
